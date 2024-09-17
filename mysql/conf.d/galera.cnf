@@ -1,0 +1,21 @@
+[mysqld]
+port=3301
+binlog_format=ROW
+default-storage-engine=innodb
+innodb_autoinc_lock_mode=2
+bind-address=0.0.0.0
+
+# galera provider config
+wsrep_on=ON
+wsrep_provider=/usr/lib/galera/libgalera_smm.so
+
+# galera cluster config
+wsrep_cluster_name="brixzen"
+wsrep_cluster_address="gcomm://node1,node2,node3"
+
+# galera sync config
+wsrep_sst_method=rsync
+
+# galera node config
+wsrep_node_address="node1"
+wsrep_node_name="node1"

@@ -1,0 +1,20 @@
+services:
+  mariadb:
+    image: mariadb:10.11.9
+    #    ports:
+    #      - '3301:3306'
+    #      - '4444:4444'
+    #      - '4567:4567'
+    #      - '4568:4568'
+    command: [ "sh", "-c", "/usr/local/bin/docker-entrypoint.sh mariadbd --wsrep-new-cluster" ]
+    volumes:
+      - './mysql/conf.d:/etc/mysql/conf.d'
+      - './mysql/data:/var/lib/mysql'
+    environment:
+      - MARIADB_ROOT_PASSWORD=malesngetik
+    network_mode: host
+    restart: unless-stopped
+    extra_hosts:
+      - "node1:192.168.1.201"
+      - "node2:192.168.1.202"
+      - "node3:192.168.1.203"
